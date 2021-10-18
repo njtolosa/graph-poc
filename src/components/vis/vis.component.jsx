@@ -1,6 +1,6 @@
 import React from "react";
 import { useRef, useEffect } from "react";
-import {getVisData} from '../../adapters/extended-sample';
+import {getVisData} from '../../adapters/simple-sample';
 
 import {Network} from 'vis-network';
 

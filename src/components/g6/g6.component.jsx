@@ -1,25 +1,15 @@
 import React from "react";
 import { useRef, useEffect } from "react";
-import data from '../../data/sample.json';
+import {getG6WithComboData} from '../../adapters/simple-sample';
 
 import G6 from '@antv/g6';
 
 const G6Chart = () => {
   const ref = useRef();
-  const nodes = data.nodes.map((node) => ({
-    ...node,
-    cluster: node.year,
-    label: node.name
-  }));
-
-  const computedData = {
-    nodes,
-    edges: data.edges
-  };
 
   const layout = {
     type: 'force',
-    clustering: true,
+    clustering: false,
     clusterNodeStrength: -5,
     clusterEdgeDistance: 200,
     clusterNodeSize: 20,
@@ -31,19 +21,21 @@ const G6Chart = () => {
   useEffect(() => {
     const graph = new G6.Graph({
       container: ref.current,
+      width: ref.current.scrollWidth,
+      height: ref.current.scrollHeight,
+      groupByTypes: false,
       layout,
       modes: {
-        default: ['zoom-canvas', 'drag-canvas', 'drag-node'],
+        default: ['zoom-canvas', 'drag-canvas', 'drag-node', 'drag-combo', 'collapse-expand-combo'],
       },
     })
   
-    graph.data(computedData);
+    graph.data(getG6WithComboData());
     graph.render();
-  });
+  }, []);
 
   return (
-    <div className="g6-chart">
-      <div ref={ref}></div>
+    <div className="g6-chart" ref={ref}>
     </div>
   );
 }

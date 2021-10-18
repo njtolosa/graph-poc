@@ -1,5 +1,5 @@
 import React from "react";
-import {getG6Data} from '../../adapters/extended-sample';
+import {getG6Data} from '../../adapters/simple-sample';
 
 import Graphin from '@antv/graphin';
 import { MiniMap } from '@antv/graphin-components';

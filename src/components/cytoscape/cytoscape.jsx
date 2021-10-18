@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import cytoscape from 'cytoscape';
-import {getCytoscapeData} from '../../adapters/extended-sample';
+import {getCytoscapeData} from '../../adapters/simple-sample';
 
 const Cytoscape = () => {
   useEffect(() => {

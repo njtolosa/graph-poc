@@ -1,4 +1,5 @@
 import data from '../data/sample.json';
+import {uniqBy} from 'lodash';
 
 export const getG6Data = () => {
   const nodes = data.nodes.map(node => ({
@@ -7,8 +8,22 @@ export const getG6Data = () => {
     label: node.name,
   }));
 
-  console.log(nodes)
   return {nodes, edges: data.edges }
+}
+
+export const getG6WithComboData = () => {
+  const nodes = data.nodes.map(node => ({
+    id: node.id,
+    label: node.name,
+    comboId: node.year,
+  }));
+  const combos = uniqBy(data.nodes, 'year').map(combo => ({
+    id: combo.year.toString(),
+    label: combo.year.toString(),
+    type: 'circle',
+  }));
+
+  return {nodes, edges: data.edges, combos }
 }
 
 export const getVisData = () => {
