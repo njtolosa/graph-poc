@@ -34,7 +34,7 @@ const Cytoscape = () => {
         fit: true,
         padding: 30,
       }
-    })
+    });
   }, []);
 
   return (

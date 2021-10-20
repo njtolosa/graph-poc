@@ -20,7 +20,8 @@ const Vis = () => {
         stabilization: false,
       },
     };
-    new Network(container, getVisData(), options);
+    const graph = new Network(container, getVisData(), options);
+    return () => graph.destroy();
   }, [chartRef]);
 
   return <div className="vis-chart">

@@ -20,7 +20,6 @@ export const getG6WithComboData = () => {
   const combos = uniqBy(data.nodes, 'year').map(combo => ({
     id: combo.year.toString(),
     label: combo.year.toString(),
-    type: 'circle',
   }));
 
   return {nodes, edges: data.edges, combos }
