@@ -1,11 +1,21 @@
 import React from "react";
-import {getG6Data} from '../../adapters/simple-sample';
+import { useState, useEffect } from "react";
+import {getG6Data, getG6WithComboData} from '../../adapters/simple-sample';
 
 import Graphin from '@antv/graphin';
 import { MiniMap } from '@antv/graphin-components';
 
 const G6React = () => {
-  const layout = {
+  const [mode, setMode] = useState('cluster');
+  const [data, setData] = useState(getG6Data());
+  const [layout, setLayout] = useState();
+  const comboLayout = {
+    type: 'force',
+    clustering: false,
+    nodeSpacing: 5,
+    preventOverlap: true,
+  };
+  const clusterLayout = {
     type: 'force',
     clustering: true,
     clusterNodeStrength: -5,
@@ -15,12 +25,26 @@ const G6React = () => {
     nodeSpacing: 5,
     preventOverlap: true,
   };
+  const modes = {
+    default: ['zoom-canvas', 'drag-canvas', 'drag-node', 'drag-combo', {type: 'collapse-expand-combo', relayout: false }],
+  };
+
+  useEffect(() => {
+    setData(mode === 'cluster' ? getG6Data() : getG6WithComboData());
+    setLayout(mode === 'cluster' ? clusterLayout : comboLayout);
+  }, [mode]);
 
   return (
-    <div className="g6-chart">
-      <Graphin data={getG6Data()} fitView fitCenter layout={layout}>
-        <MiniMap />
-      </Graphin>
+    <div className="container">
+      <div className="chart">
+        <Graphin data={data} fitView fitCenter layout={layout} modes={modes}>
+          <MiniMap />
+        </Graphin>
+      </div>
+      <div className="chart-options">
+        <button onClick={() => setMode('cluster')}>Cluster</button>
+        <button onClick={() => setMode('combo')}>Combo</button>
+      </div>
     </div>
   );
 }

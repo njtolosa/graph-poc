@@ -1,4 +1,16 @@
-.g6-chart {
-  width: 100%;
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.chart {
+  width: 90vw;
   height: 90vh;
+}
+
+.chart-options {
+  width: 10vw;
+  height: 90vh;
+  border: 1px solid;
+  justify-content: center;
 }
